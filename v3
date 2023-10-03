@@ -188,3 +188,5 @@ def ai_meeting(topic):
 if __name__ == "__main__":
     meeting_topic = input("Enter the topic for the meeting: ")
     ai_meeting(meeting_topic)
+
+#PYQT for GUI. Sends text to text box underneath where user enters info. Generates live video and saves video aftewards.

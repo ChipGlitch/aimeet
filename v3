@@ -44,6 +44,7 @@ def text_to_audio(text, voice_type="neutral"):
             name="en-GB-Wavenet-D",
             ssml_gender=texttospeech.SsmlVoiceGender.MALE
         )
+# Randomize voice -TODO
     else:
         voice = texttospeech.VoiceSelectionParams(
             language_code="en-US",
@@ -62,6 +63,7 @@ def text_to_audio(text, voice_type="neutral"):
 def split_into_paragraphs(text):
     return [para.strip() for para in text.split("\n") if para.strip() != ""]
 
+#switch between avatar/picture
 
 def generate_image_from_text(text):
     response = requests.post(

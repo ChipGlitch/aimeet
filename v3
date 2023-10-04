@@ -63,7 +63,7 @@ def text_to_audio(text, voice_type="neutral"):
 def split_into_paragraphs(text):
     return [para.strip() for para in text.split("\n") if para.strip() != ""]
 
-#switch between avatar/picture
+#witch between avatar/pictures
 
 def generate_image_from_text(text):
     response = requests.post(
@@ -191,3 +191,4 @@ if __name__ == "__main__":
 
 # PYQT for GUI. Sends text to text box underneath where user enters info. Generates live video and saves video aftewards.
 # https://www.d-id.com/api/?utm_term=ai%20avatar%20api&utm_campaign=API&utm_source=adwords&utm_medium=ppc&hsa_acc=6149207258&hsa_cam=19663081091&hsa_grp=146356427216&hsa_ad=670131118949&hsa_src=g&hsa_tgt=kwd-1926918698331&hsa_kw=ai%20avatar%20api&hsa_mt=p&hsa_net=adwords&hsa_ver=3&gad_source=1&gclid=CjwKCAjw9-6oBhBaEiwAHv1QvDGcpA1abNL4uxMRm4bFOHapUVRg_yyH0J0HErT9JcPfJCCyG-hB5BoCmQEQAvD_BwE
+#let them name AI so it's not like input from A1-1

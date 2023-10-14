@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Meeting</title>
+</head>
+<body>
+
+<!-- Button to initiate the AI Meeting -->
+<button onclick="startMeeting()">Start AI Meeting</button>
+<br><br>
+
+<!-- Chat Interface -->
+<h3>Chat with AI:</h3>
+<textarea id="chatHistory" readonly style="width:400px; height:200px;"></textarea><br>
+<input type="text" id="userMessage" placeholder="Type your message..." style="width:300px;">
+<button onclick="sendUserMessage()">Send</button>
+
+<script>
+    const pc = new RTCPeerConnection();
+    let dataChannel = pc.createDataChannel("chat");
+
+    async function startMeeting() {
+        // Create an offer
+        const offer = await pc.createOffer();
+        await pc.setLocalDescription(offer);
+
+        // Send offer to server and receive an answer
+        const response = await fetch("/offer", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                sdp: pc.localDescription.sdp,
+                type: pc.localDescription.type
+            })
+        });
+        const answer = await response.json();
+
+        // Set remote description based on answer from the server
+        await pc.setRemoteDescription(new RTCSessionDescription(answer));
+
+        // For handling received messages
+        dataChannel.onmessage = function(event) {
+            const chatHistory = document.getElementById('chatHistory');
+            chatHistory.value += "AI: " + event.data + "\n";
+        };
+    }
+
+    function sendUserMessage() {
+        const userMessage = document.getElementById('userMessage').value;
+        dataChannel.send(userMessage);
+        const chatHistory = document.getElementById('chatHistory');
+        chatHistory.value += "You: " + userMessage + "\n";
+        document.getElementById('userMessage').value = ''; // Clear the input
+    }
+</script>
+</body>
+</html>

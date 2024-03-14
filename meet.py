@@ -4,7 +4,7 @@ from google.cloud import texttospeech
 import pygame
 
 # Set up your API key
-openai.api_key = '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'
+openai.api_key = 'private'
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/Users/Zachc57/PycharmProjects/pythonProject/venv/myKey.json'
 client = texttospeech.TextToSpeechClient()
 
